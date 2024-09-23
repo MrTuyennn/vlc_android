@@ -1,4 +1,4 @@
-package com.example.vlcjuncook
+package com.example.vlcjuncook.vlc
 
 import android.content.ContentValues.TAG
 import android.net.Uri
@@ -7,18 +7,13 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vlcjuncook.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
 
-class MainActivity : AppCompatActivity() {
+class vlc_activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
 
     private var libVLC: LibVLC? = null
     private var vlcMediaPlayer: MediaPlayer? = null
@@ -44,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 "--sout-x264-nf"
             )
         )
-        initializeVlcVideoPlayer("rtsp://admin:1234@goduck.dvrhost.net:554/video1");
+        initializeVlcVideoPlayer("rtsp://clever-link.livestage.biz:8554/live/cam1");
         // Initialize your VLC player here
     }
 
@@ -83,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setVlcMedia(videoUrl: String) {
-        val media = Media(libVLC, Uri.parse(videoUrl))
+        val media = org.videolan.libvlc.Media(libVLC, Uri.parse(videoUrl))
         vlcMediaPlayer?.media = media
         vlcMediaPlayer?.play()
         media.release() // Release the media object once it is attached to the player
@@ -100,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             }
             vlcMediaPlayer?.play()
             media.release()
+            binding.vlcVideoLayout.visibility = View.VISIBLE
             Log.d(TAG, "VLC Event Playing")
         }
     }
@@ -113,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             MediaPlayer.Event.Playing -> {
-                binding.loadingVideo.visibility = View.INVISIBLE
+                binding.loadingVideo.visibility = View.GONE
                 Log.d(TAG, "VLC Event Playing")
             }
 
@@ -122,30 +118,26 @@ class MainActivity : AppCompatActivity() {
             }
 
             MediaPlayer.Event.Stopped -> {
-                binding.loadingVideo.visibility = View.INVISIBLE
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(500)
-                    setVlcMedia("rtsp://admin:1234@goduck.dvrhost.net:554/video1")
-                }
+                binding.loadingVideo.visibility = View.GONE
                 Log.d(TAG, "VLC Event Stopped")
             }
 
             MediaPlayer.Event.EncounteredError -> {
-                binding.loadingVideo.visibility = View.INVISIBLE
+                binding.loadingVideo.visibility = View.GONE
                 Log.d(TAG, "VLC Event Error")
             }
 
             MediaPlayer.Event.EndReached -> {
-                binding.loadingVideo.visibility = View.INVISIBLE
+                binding.loadingVideo.visibility = View.GONE
                 Log.d(TAG, "VLC Event End Reached")
             }
 
             MediaPlayer.Event.TimeChanged -> {
-             //   Log.d(TAG, "VLC Event Time Changed")
+                Log.d(TAG, "VLC Event Time Changed")
             }
 
             MediaPlayer.Event.PositionChanged -> {
-              //  Log.d(TAG, "VLC Event Position Changed")
+                Log.d(TAG, "VLC Event Position Changed")
             }
 
             MediaPlayer.Event.SeekableChanged -> {
@@ -161,7 +153,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             MediaPlayer.Event.Vout -> {
-                binding.loadingVideo.visibility = View.INVISIBLE
                 Log.d(TAG, "VLC Event Video Output")
             }
 
@@ -182,6 +173,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }

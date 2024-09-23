@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-    <org.videolan.libvlc.util.VLCVideoLayout android:id="@+id/vlc_video_layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <!-- Video Layout -->
+    <org.videolan.libvlc.util.VLCVideoLayout
+        android:id="@+id/vlc_video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
         />
-</LinearLayout>
+
+    <!-- Progress Bar Loading nằm trên video -->
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loading_video"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:progressTint="@color/white" />
+
+</FrameLayout>
