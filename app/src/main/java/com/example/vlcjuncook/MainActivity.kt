@@ -5,7 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.vlcjuncook.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 "--clock-jitter=0",
                 "--live-caching=150",
                 "--drop-late-frames",
+                "--sout-rtp-proto=udp",
                 "--skip-frames",
                 "--vout=android-display",
                 "--sout-transcode-vb=20",
@@ -44,8 +48,11 @@ class MainActivity : AppCompatActivity() {
                 "--sout-x264-nf"
             )
         )
-        initializeVlcVideoPlayer("rtsp://admin:1234@goduck.dvrhost.net:554/video1");
+        initializeVlcVideoPlayer("rtsp://clever-link.livestage.biz:8554/live/cam1");
         // Initialize your VLC player here
+
+        binding.btnNavigation.setOnClickListener {
+        }
     }
 
     override fun onPause() {
@@ -141,11 +148,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             MediaPlayer.Event.TimeChanged -> {
-             //   Log.d(TAG, "VLC Event Time Changed")
+                binding.loadingVideo.visibility = View.INVISIBLE
+                Log.d(TAG, "VLC Event Time Changed")
             }
 
             MediaPlayer.Event.PositionChanged -> {
-              //  Log.d(TAG, "VLC Event Position Changed")
+                binding.loadingVideo.visibility = View.INVISIBLE
+                Log.d(TAG, "VLC Event Position Changed")
             }
 
             MediaPlayer.Event.SeekableChanged -> {
