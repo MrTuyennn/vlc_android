@@ -29,8 +29,6 @@ class VlcActivity : AppCompatActivity() {
             "rtsp://admin:1234@goduck.dvrhost.net:554/video1",
             "rtsp://admin:1234@goduck.dvrhost.net:554/video2",
             "rtsp://admin:1234@goduck.dvrhost.net:554/video1",
-            
-
         )
         val customAdapter = ItemAdapter(dataset)
         val recyclerView: RecyclerView = binding.recyclerView
