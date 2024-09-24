@@ -1,4 +1,4 @@
-package com.example.vlcjuncook.ListView.ui.theme
+package com.example.vlcjuncook.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.example.vlcjuncook.ListView
+package com.example.vlcjuncook
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,32 +9,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.vlcjuncook.View.VLCView
 import com.example.vlcjuncook.theme.VlcjuncookTheme
 
-class ListScreen : ComponentActivity() {
+class Main : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            VlcjuncookTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            VLCView(uri = "rtsp://admin:1234@goduck.dvrhost.net:554/video1")
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting2(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
@@ -43,8 +34,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun GreetingPreview2() {
     VlcjuncookTheme {
-        Greeting("Android")
+        Greeting2("Android")
     }
 }
