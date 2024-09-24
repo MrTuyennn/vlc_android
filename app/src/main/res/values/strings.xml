@@ -45,4 +45,5 @@
     </string>
     <string name="item_text">item</string>
     <string name="navigation">navigation</string>
+    <string name="title_activity_list_screen">ListScreen</string>
 </resources>

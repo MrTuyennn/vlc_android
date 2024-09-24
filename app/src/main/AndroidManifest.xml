@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vlcjuncook"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ListView.ListScreen"
+            android:exported="false"
+            android:label="@string/title_activity_list_screen"
+            android:theme="@style/Theme.Vlcjuncook" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
