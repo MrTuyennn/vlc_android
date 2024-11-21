@@ -4,6 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -16,29 +22,32 @@
         android:theme="@style/Theme.Vlcjuncook"
         tools:targetApi="31">
         <activity
-            android:name=".Main"
-            android:exported="true"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Vlcjuncook" >
+            android:name=".MainActivity_CapView"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListView.ListScreen"
+            android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_list_screen"
+            android:label="@string/title_activity_main"
             android:theme="@style/Theme.Vlcjuncook">
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ListView.ListScreen"
+            android:exported="false"
+            android:label="@string/title_activity_list_screen"
+            android:theme="@style/Theme.Vlcjuncook"></activity>
+        <activity
+            android:name=".Main"
             android:exported="false" />
         <activity
             android:name=".vlc.VlcActivity"
             android:exported="false"
-            android:theme="@style/Theme.Vlcjuncook"/>
+            android:theme="@style/Theme.Vlcjuncook" />
     </application>
 
 </manifest>

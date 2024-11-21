@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,6 +23,7 @@ import org.videolan.libvlc.MediaPlayer
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var pickMultipleMediaLauncher: ActivityResultLauncher<Void?>
 
 
     private var libVLC: LibVLC? = null
@@ -52,6 +55,17 @@ class MainActivity : AppCompatActivity() {
         // Initialize your VLC player here
 
         binding.btnNavigation.setOnClickListener {
+        }
+
+
+        registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
+            // Callback is invoked after the user selects media items or closes the
+            // photo picker.
+            if (uris.isNotEmpty()) {
+                Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
         }
     }
 
